@@ -1,0 +1,1 @@
+INSERT INTO mojabaza.hall (hall_name) VALUES ('Hall 1');
