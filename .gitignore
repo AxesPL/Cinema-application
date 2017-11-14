@@ -1,6 +1,5 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
-
 ### STS ###
 .apt_generated
 .classpath
@@ -22,3 +21,4 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+/src/main/resources/static/bower_components/

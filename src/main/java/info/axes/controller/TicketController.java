@@ -10,14 +10,5 @@ public class TicketController {
     public String ticket(@RequestParam(name = "showingid") Long showingId){
         return "ticket.html";
     }
-    /*
-    @GetMapping(path="/index")
-    public String index(){
-        return "index.html";
-    }
-    @GetMapping(path="/showings")
-        public String showings(){
-            return "showings.html";
-        }*/
     }
 
