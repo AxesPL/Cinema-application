@@ -1,4 +1,4 @@
-package info.axes.model;
+package info.axes.model.entity;
 
 import lombok.Data;
 
@@ -11,7 +11,4 @@ import javax.persistence.*;
     private Long id;
     @ManyToOne
     private Showing showing;
-    @ManyToOne
-    private Seat seat;
-    private String status;
 }

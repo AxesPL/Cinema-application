@@ -1,6 +1,6 @@
 package info.axes.repository;
 
-import info.axes.model.Movie;
+import info.axes.model.entity.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

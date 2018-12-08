@@ -1,4 +1,4 @@
-package info.axes.model;
+package info.axes.model.entity;
 
 import lombok.Data;
 
@@ -8,9 +8,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-@Data public class Hall {
+@Data public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String hallName;
+
+    private String movieTitle;
+
+    private String movieDescription;
+
+    //in minutes
+    private int movieDuration;
 }
