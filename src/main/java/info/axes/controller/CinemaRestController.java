@@ -1,5 +1,6 @@
 package info.axes.controller;
 
+import info.axes.model.api.UpcomingMovieDto;
 import info.axes.model.dto.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,4 +32,10 @@ public interface CinemaRestController {
 
     @RequestMapping(method = RequestMethod.GET, path="/income",produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<TicketSalesMonthReport>> getIncomeFromLast6Months();
+
+    @RequestMapping(method = RequestMethod.GET, path="/movies-upcoming",produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<UpcomingMovieDto>> getUpcomingMovies();
+
+    @RequestMapping(method = RequestMethod.POST, path = "/movies",consumes = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Void> saveMovie(@RequestBody UpcomingMovieDto movie);
 }

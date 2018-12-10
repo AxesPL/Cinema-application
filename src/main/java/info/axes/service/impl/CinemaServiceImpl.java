@@ -1,5 +1,7 @@
 package info.axes.service.impl;
 
+import info.axes.component.ClientApi;
+import info.axes.model.api.UpcomingMovieDto;
 import info.axes.model.dto.*;
 import info.axes.model.entity.Showing;
 import info.axes.model.entity.ShowingHour;
@@ -44,6 +46,8 @@ public class CinemaServiceImpl implements CinemaService {
     private final ShowingHourMapper showingHourMapper;
 
     private final TicketRepository ticketRepository;
+
+    private final ClientApi clientApi;
 
     private final DateTimeFormatter formatterToDto = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -116,6 +120,16 @@ public class CinemaServiceImpl implements CinemaService {
             report.setMonthNumer(month.getValue());
             return report;
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<UpcomingMovieDto> getUpcomingMovies() {
+        return clientApi.getUpcomingMovies().getUpcomingMoviesDto();
+    }
+
+    @Override
+    public void saveMovie(UpcomingMovieDto movieDto) {
+        movieRepository.save(movieMapper.mapToDbo(movieDto));
     }
 
     private boolean checkLeapYear(int year) {

@@ -1,6 +1,7 @@
 package info.axes.controller.impl;
 
 import info.axes.controller.CinemaRestController;
+import info.axes.model.api.UpcomingMovieDto;
 import info.axes.model.dto.*;
 import info.axes.service.CinemaService;
 import lombok.AllArgsConstructor;
@@ -55,6 +56,17 @@ public class CinemaRestControllerImpl implements CinemaRestController {
     @Override
     public ResponseEntity<List<TicketSalesMonthReport>> getIncomeFromLast6Months() {
         return ResponseEntity.ok(cinemaService.getTicketSalesReportsFromLast6Months());
+    }
+
+    @Override
+    public ResponseEntity<List<UpcomingMovieDto>> getUpcomingMovies() {
+        return ResponseEntity.ok(cinemaService.getUpcomingMovies());
+    }
+
+    @Override
+    public ResponseEntity<Void> saveMovie(@RequestBody UpcomingMovieDto movie) {
+        cinemaService.saveMovie(movie);
+        return ResponseEntity.ok(null);
     }
 
 }

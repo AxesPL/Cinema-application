@@ -1,5 +1,6 @@
 package info.axes.service.mapper.impl;
 
+import info.axes.model.api.UpcomingMovieDto;
 import info.axes.model.dto.MovieDto;
 import info.axes.model.entity.Movie;
 import info.axes.service.mapper.MovieMapper;
@@ -14,5 +15,14 @@ public class MovieMapperImpl implements MovieMapper {
         movieDto.setMovieDescription(movie.getMovieDescription());
         movieDto.setMovieTitle(movie.getMovieTitle());
         return movieDto;
+    }
+
+    @Override
+    public Movie mapToDbo(UpcomingMovieDto movieDto) {
+        Movie movie = new Movie();
+        movie.setMovieDescription(movieDto.getOverview());
+        movie.setMovieTitle(movieDto.getTitle());
+        movie.setMoviePosterPath(movieDto.getPosterPath());
+        return movie;
     }
 }

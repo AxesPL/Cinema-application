@@ -20,6 +20,8 @@ public class Movie {
 
     private String movieDescription;
 
+    private String moviePosterPath;
+
     public Movie(Long id){
         this.id=id;
     }
