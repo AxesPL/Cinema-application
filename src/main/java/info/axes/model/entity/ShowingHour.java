@@ -17,4 +17,8 @@ public class ShowingHour  {
     @Id
     @Column(length = 10)
     private String showingHour;
+
+    public ShowingHour(String showingHour) {
+        this.showingHour = showingHour;
+    }
 }

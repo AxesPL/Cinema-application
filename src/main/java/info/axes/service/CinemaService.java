@@ -1,9 +1,6 @@
 package info.axes.service;
 
-import info.axes.model.dto.AvailableHoursDto;
-import info.axes.model.dto.HallDto;
-import info.axes.model.dto.MovieDto;
-import info.axes.model.dto.ShowingDto;
+import info.axes.model.dto.*;
 
 import java.util.List;
 
@@ -13,4 +10,6 @@ public interface CinemaService {
     List<HallDto> getAllHalls();
     List<MovieDto> getAllMovies();
     List<AvailableHoursDto> getAvailableHoursByShowingId(long hallId, String showingDate);
+    void saveShowing(SaveShowingDto saveShowingDto);
+    List<TicketSalesMonthReport> getTicketSalesReportsFromLast6Months();
 }

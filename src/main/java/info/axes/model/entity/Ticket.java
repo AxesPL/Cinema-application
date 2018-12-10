@@ -11,4 +11,6 @@ import javax.persistence.*;
     private Long id;
     @ManyToOne
     private Showing showing;
+
+    private float paidPrice;
 }

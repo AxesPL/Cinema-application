@@ -2,12 +2,15 @@ package info.axes.model.entity;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Data public  class Showing {
+@Data
+@NoArgsConstructor
+public  class Showing {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;

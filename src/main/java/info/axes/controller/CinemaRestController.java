@@ -1,12 +1,10 @@
 package info.axes.controller;
 
-import info.axes.model.dto.AvailableHoursDto;
-import info.axes.model.dto.HallDto;
-import info.axes.model.dto.MovieDto;
-import info.axes.model.dto.ShowingDto;
+import info.axes.model.dto.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,4 +25,10 @@ public interface CinemaRestController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/halls/{hallId}/{showingDate}/get-available-hours")
     ResponseEntity<List<AvailableHoursDto>> getAvailableHoursByShowing(@PathVariable("hallId") long hallId, @PathVariable("showingDate") String showingDate);
+
+    @RequestMapping(method = RequestMethod.POST, path = "/showings", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Void> saveShowing(@RequestBody SaveShowingDto saveShowingDto);
+
+    @RequestMapping(method = RequestMethod.GET, path="/income",produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<TicketSalesMonthReport>> getIncomeFromLast6Months();
 }

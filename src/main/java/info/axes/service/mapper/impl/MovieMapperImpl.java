@@ -12,7 +12,6 @@ public class MovieMapperImpl implements MovieMapper {
         MovieDto movieDto = new MovieDto();
         movieDto.setId(movie.getId());
         movieDto.setMovieDescription(movie.getMovieDescription());
-        movieDto.setMovieDuration(movie.getMovieDuration());
         movieDto.setMovieTitle(movie.getMovieTitle());
         return movieDto;
     }

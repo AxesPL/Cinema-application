@@ -1,15 +1,13 @@
 package info.axes.controller.impl;
 
 import info.axes.controller.CinemaRestController;
-import info.axes.model.dto.AvailableHoursDto;
-import info.axes.model.dto.HallDto;
-import info.axes.model.dto.MovieDto;
-import info.axes.model.dto.ShowingDto;
+import info.axes.model.dto.*;
 import info.axes.service.CinemaService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,6 +44,17 @@ public class CinemaRestControllerImpl implements CinemaRestController {
     @Override
     public ResponseEntity<List<AvailableHoursDto>> getAvailableHoursByShowing(long hallId, String showingDate) {
         return ResponseEntity.ok(cinemaService.getAvailableHoursByShowingId(hallId,showingDate));
+    }
+
+    @Override
+    public ResponseEntity<Void> saveShowing(@RequestBody SaveShowingDto saveShowingDto) {
+        cinemaService.saveShowing(saveShowingDto);
+        return ResponseEntity.ok(null);
+    }
+
+    @Override
+    public ResponseEntity<List<TicketSalesMonthReport>> getIncomeFromLast6Months() {
+        return ResponseEntity.ok(cinemaService.getTicketSalesReportsFromLast6Months());
     }
 
 }

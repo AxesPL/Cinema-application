@@ -1,15 +1,10 @@
 package info.axes.service.impl;
 
-import info.axes.model.dto.AvailableHoursDto;
-import info.axes.model.dto.HallDto;
-import info.axes.model.dto.MovieDto;
-import info.axes.model.dto.ShowingDto;
+import info.axes.model.dto.*;
 import info.axes.model.entity.Showing;
 import info.axes.model.entity.ShowingHour;
-import info.axes.repository.HallRepository;
-import info.axes.repository.MovieRepository;
-import info.axes.repository.ShowingHourRepository;
-import info.axes.repository.ShowingRepository;
+import info.axes.model.entity.Ticket;
+import info.axes.repository.*;
 import info.axes.service.CinemaService;
 import info.axes.service.mapper.HallMapper;
 import info.axes.service.mapper.MovieMapper;
@@ -21,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +43,8 @@ public class CinemaServiceImpl implements CinemaService {
 
     private final ShowingHourMapper showingHourMapper;
 
+    private final TicketRepository ticketRepository;
+
     private final DateTimeFormatter formatterToDto = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     @Override
@@ -68,7 +67,6 @@ public class CinemaServiceImpl implements CinemaService {
     @Override
     public List<MovieDto> getAllMovies() {
         return movieRepository.findAll().stream().map(movieMapper::mapToDto).collect(Collectors.toList());
-
     }
 
     @Override
@@ -79,4 +77,50 @@ public class CinemaServiceImpl implements CinemaService {
             return !showingRepository.existsByHall_IdAndShowingDateAndShowingHour(hallId, showingDateParam, showingHour);
         }).map(showingHourMapper::mapToDto).collect(Collectors.toList());
     }
+
+    @Override
+    public void saveShowing(SaveShowingDto saveShowingDto) {
+        showingRepository.save(showingMapper.mapToDbo(saveShowingDto));
+    }
+
+    @Override
+    public List<TicketSalesMonthReport> getTicketSalesReportsFromLast6Months() {
+        Month currentMonth = LocalDate.now().getMonth();
+        LinkedList<Month> reportMonths = new LinkedList<>();
+        for (int i = 1; i <= 6; i++) {
+            reportMonths.add(currentMonth.minus(i));
+        }
+        //need to change the year
+        LocalDate reportStartingDate;
+        LocalDate reportEndingDate;
+
+        if (reportMonths.getFirst().getValue() < reportMonths.getLast().getValue()) {
+
+            reportStartingDate = LocalDate.of(LocalDate.now().getYear() - 1, reportMonths.getLast(), 1);
+
+            if (LocalDate.now().getMonth().equals(Month.JANUARY)) {
+
+                reportEndingDate = LocalDate.of(LocalDate.now().getYear() - 1, reportMonths.getFirst(), reportMonths.getFirst().length(checkLeapYear(LocalDate.now().getYear())));
+
+            } else
+                reportEndingDate = LocalDate.of(LocalDate.now().getYear() - 1, reportMonths.getFirst(), reportMonths.getFirst().length(checkLeapYear(LocalDate.now().getYear())));
+        } else {
+            reportStartingDate = LocalDate.of(LocalDate.now().getYear(), reportMonths.getLast(), 1);
+
+            reportEndingDate = LocalDate.of(LocalDate.now().getYear(), reportMonths.getFirst(), reportMonths.getFirst().length(checkLeapYear(LocalDate.now().getYear())));
+        }
+        List<Ticket> ticketSoldBetweenDates = ticketRepository.findAllByShowing_ShowingDateBetween(reportStartingDate, reportEndingDate);
+        return reportMonths.stream().map(month -> {
+            TicketSalesMonthReport report = new TicketSalesMonthReport();
+            report.setIncome((float) ticketSoldBetweenDates.stream().filter(ticket -> ticket.getShowing().getShowingDate().getMonth().equals(month)).mapToDouble(Ticket::getPaidPrice).sum());
+            report.setMonthNumer(month.getValue());
+            return report;
+        }).collect(Collectors.toList());
+    }
+
+    private boolean checkLeapYear(int year) {
+        return year % 4 == 0;
+    }
+
+
 }
