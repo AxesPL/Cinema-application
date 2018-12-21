@@ -10,6 +10,6 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface ShowingRepository extends JpaRepository<Showing,Long> {
-    List<Showing> findAllByShowingDate(LocalDate showingDate);
+    List<Showing> findAllByShowingDateAfter(LocalDate showingDate);
     boolean existsByHall_IdAndShowingDateAndShowingHour(long hallId,LocalDate showingDate, ShowingHour showingHour);
 }

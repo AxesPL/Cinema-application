@@ -54,7 +54,8 @@ public class CinemaServiceImpl implements CinemaService {
     @Override
     public List<ShowingDto> getAllShowingsByShowingDate(String showingDate) {
         LocalDate showingDateParam = LocalDate.parse(showingDate, formatterToDto);
-        List<Showing> showingsByDate = showingRepository.findAllByShowingDate(showingDateParam);
+        showingDateParam = showingDateParam.minusDays(1);
+        List<Showing> showingsByDate = showingRepository.findAllByShowingDateAfter(showingDateParam);
         return showingsByDate.stream().map(showingMapper::mapToDto).collect(Collectors.toList());
     }
 
