@@ -4,13 +4,11 @@ import info.axes.model.api.UpcomingMovieDto;
 import info.axes.model.dto.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(allowedHeaders = "*", origins = "http://localhost:4200")
 public interface CinemaRestController {
     @RequestMapping(method = RequestMethod.GET, path = "/showings/{showingDate}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<ShowingDto>> getShowingsByShowingDate(@PathVariable("showingDate") String showingDate);
