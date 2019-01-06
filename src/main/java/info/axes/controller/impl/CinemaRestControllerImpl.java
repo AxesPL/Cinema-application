@@ -20,8 +20,8 @@ public class CinemaRestControllerImpl implements CinemaRestController {
     private final CinemaService cinemaService;
 
     @Override
-    public ResponseEntity<List<ShowingDto>> getShowingsByShowingDate(@PathVariable("showingDate") String showingDate) {
-        return ResponseEntity.ok(cinemaService.getAllShowingsByShowingDate(showingDate));
+    public ResponseEntity<List<ShowingDto>> getShowingsByShowingDate() {
+        return ResponseEntity.ok(cinemaService.getAllShowingsByShowingDate());
     }
 
     @Override

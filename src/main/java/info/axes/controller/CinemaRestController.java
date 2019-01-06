@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 public interface CinemaRestController {
-    @RequestMapping(method = RequestMethod.GET, path = "/showings/{showingDate}", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<ShowingDto>> getShowingsByShowingDate(@PathVariable("showingDate") String showingDate);
+    @RequestMapping(method = RequestMethod.GET, path = "/showings", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<ShowingDto>> getShowingsByShowingDate();
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/showings/{id}")
     ResponseEntity<Void> deleteShowingById(@PathVariable("id") long showingId);

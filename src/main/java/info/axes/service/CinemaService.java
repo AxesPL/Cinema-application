@@ -6,7 +6,7 @@ import info.axes.model.dto.*;
 import java.util.List;
 
 public interface CinemaService {
-    List<ShowingDto> getAllShowingsByShowingDate(String showingDate);
+    List<ShowingDto> getAllShowingsByShowingDate();
     void deleteShowingById(long showingId);
     List<HallDto> getAllHalls();
     List<MovieDto> getAllMovies();
