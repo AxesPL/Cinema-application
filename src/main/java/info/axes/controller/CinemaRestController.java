@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(allowedHeaders = "*", origins = "http://localhost:4200")
 public interface CinemaRestController {
     @RequestMapping(method = RequestMethod.GET, path = "/showings/{showingDate}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<ShowingDto>> getShowingsByShowingDate(@PathVariable("showingDate") String showingDate);

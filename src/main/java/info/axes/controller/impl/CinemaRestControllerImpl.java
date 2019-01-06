@@ -7,16 +7,14 @@ import info.axes.service.CinemaService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("/api")
 @RestController
 @AllArgsConstructor(onConstructor = @_(@Autowired))
+@CrossOrigin(allowedHeaders = "*", origins = "http://localhost:4200")
 public class CinemaRestControllerImpl implements CinemaRestController {
 
     private final CinemaService cinemaService;
