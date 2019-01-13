@@ -11,8 +11,8 @@ public class ShowingDto implements Serializable {
 
     private long id;
     private String showingDate;
+    private String showingHour;
     private String movieTitle;
     private String hallName;
     private float ticketPrice;
-
 }

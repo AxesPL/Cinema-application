@@ -26,6 +26,7 @@ public class ShowingMapperImpl implements ShowingMapper {
         showingDto.setMovieTitle(showing.getMovie().getMovieTitle());
         showingDto.setTicketPrice(showing.getShowingBasePrice());
         showingDto.setShowingDate(showing.getShowingDate().format(formatter));
+        showingDto.setShowingHour(showing.getShowingHour().getShowingHour());
         return showingDto;
     }
 
