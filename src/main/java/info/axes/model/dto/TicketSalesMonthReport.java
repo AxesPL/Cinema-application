@@ -8,6 +8,6 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 public class TicketSalesMonthReport implements Serializable {
-    private int monthNumer;
+    private int monthNumber;
     private float income;
 }
